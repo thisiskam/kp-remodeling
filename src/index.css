@@ -1,0 +1,21 @@
+#root {
+    margin: 0px
+}
+
+.text-hover-black:hover {
+    color: rgb(44, 42, 42) !important;
+  }
+
+.jumbotron-background {
+    background-image: url('Bathroom-four.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 720px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.max-height-800-px {
+    max-height: 800px;
+}
