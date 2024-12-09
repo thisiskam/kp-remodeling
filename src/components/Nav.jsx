@@ -24,13 +24,13 @@ export default function Nav () {
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item fs-5">
-                            <Link className="nav-link" to="/about">About</Link>
+                            <Link className="nav-link" to="/portfolio">Portfolio</Link>
                         </li>
                         <li className="nav-item fs-5">
-                            <Link className="nav-link" to="/services">Services</Link>
+                            <Link className="nav-link" to="/estimate">Estimate</Link>
                         </li>
                         <li className="nav-item fs-5">
-                            <Link className="nav-link" to="/contact">Contact</Link>
+                            <Link className="nav-link" to="/blog">Blog</Link>
                         </li>
                     </ul>
                 </div>

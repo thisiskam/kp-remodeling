@@ -1,6 +1,6 @@
-import Nav from './Nav'
 
-export default function Jumbotron() {
+
+export default function HomeBanner() {
 
   return (
     <>

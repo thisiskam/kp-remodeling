@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom"
-import Footer from "../components/Footer"
-import Nav from "../components/Nav";
+import Footer from '../components/Footer';
+import ProjectShowcase from '../components/ProjectShowcase';
+import PageBanner from '../components/PageBanner';
+import Testimonials from '../components/Testimonials';
 
-export default function Portfolio () {
+export default function Portfolio() {
+    const bannerHeading = "Our Work"
+    const bannerSubHeading = "Discover our exceptional projects and the transformations we have achieved."
     return (
         <>
-            <div className="bg-secondary">
-                <Nav />
-            </div>
+            <PageBanner bannerHeading={bannerHeading} bannerSubHeading={bannerSubHeading}/>
+            <ProjectShowcase />
+            <Testimonials />
             <Footer />
         </>
-    )
+    );
 }

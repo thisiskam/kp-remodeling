@@ -1,4 +1,4 @@
-import Jumbotron from "../components/Jumbotron"
+import HomeBanner from "../components/HomeBanner"
 import Mission from "../components/Mission"
 import Blogcards from "../components/Blogcards"
 import HomeCarousel from "../components/HomeCarousel"
@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 export default function Home () {
     return (
         <> 
-            <Jumbotron />
+            <HomeBanner />
             <Mission />
             <Blogcards />
             <HomeCarousel/>

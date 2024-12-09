@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
+import PageBanner from "../components/PageBanner"
 
 export default function Blog () {
+    const bannerHeading = "Helpful Tips"
+    const bannerSubHeading = "Interesting articles to help with any job you have coming up"
     return (
         <> 
-            <div className="d-flex justify-content-center flex-column">
-                <p className="display-3 text-center mt-5">Blog Page</p>
-                <Link className="btn fs-3" to='/'>Home</Link>
-            </div>
+            <PageBanner bannerHeading={bannerHeading} bannerSubHeading={bannerSubHeading}/>
         </>
     )
 }
