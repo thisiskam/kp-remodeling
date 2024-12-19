@@ -1,4 +1,5 @@
 import PageBanner from "../components/PageBanner"
+import Blogcards from "../components/Blogcards"
 
 export default function Blog () {
     const bannerHeading = "Helpful Tips"
@@ -6,6 +7,7 @@ export default function Blog () {
     return (
         <> 
             <PageBanner bannerHeading={bannerHeading} bannerSubHeading={bannerSubHeading}/>
+            <Blogcards page="blog"/>
         </>
     )
 }

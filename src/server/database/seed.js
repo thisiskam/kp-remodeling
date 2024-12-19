@@ -237,35 +237,39 @@ const insertBlogs = async () => {
 const blogImages = [
     {
         blog_id: "1",
-        image_url: "public/blog/blog-image-painting-cabinets-1.jpg"
+        image_url: "/blog/blog-image-painting-cabinets-1.jpg"
     },
     {
         blog_id: "1",
-        image_url: "public/blog/blog-image-painting-cabinets-2.jpg"
+        image_url: "/blog/blog-image-painting-cabinets-2.jpg"
     },
     {
         blog_id: "2",
-        image_url: "public/blog/blog-image-tile-trims-1.jpeg"
+        image_url: "/blog/blog-image-tile-trims-6.jpeg"
     },
     {
         blog_id: "2",
-        image_url: "public/blog/blog-image-tile-trims-2.jpeg"
+        image_url: "/blog/blog-image-tile-trims-1.jpeg"
     },
     {
         blog_id: "2",
-        image_url: "public/blog/blog-image-tile-trims-3.jpeg"
+        image_url: "/blog/blog-image-tile-trims-2.jpeg"
     },
     {
         blog_id: "2",
-        image_url: "public/blog/blog-image-tile-trims-4.jpeg"
+        image_url: "/blog/blog-image-tile-trims-3.jpeg"
     },
     {
         blog_id: "2",
-        image_url: "public/blog/blog-image-tile-trims-5.jpeg"
+        image_url: "/blog/blog-image-tile-trims-4.jpeg"
+    },
+    {
+        blog_id: "2",
+        image_url: "/blog/blog-image-tile-trims-5.jpeg"
     },
     {
         blog_id: "3",
-        image_url: "public/blog/blog-image-kitchen-remodel-1.jpeg"
+        image_url: "/blog/blog-image-kitchen-remodel-1.jpeg"
     }
 ]
 

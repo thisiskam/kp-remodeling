@@ -1,4 +1,3 @@
-import Footer from '../components/Footer';
 import ProjectShowcase from '../components/ProjectShowcase';
 import PageBanner from '../components/PageBanner';
 import Testimonials from '../components/Testimonials';
@@ -11,7 +10,6 @@ export default function Portfolio() {
             <PageBanner bannerHeading={bannerHeading} bannerSubHeading={bannerSubHeading}/>
             <ProjectShowcase />
             <Testimonials />
-            <Footer />
         </>
     );
 }

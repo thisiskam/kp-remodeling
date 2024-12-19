@@ -7,12 +7,11 @@ dotenv.config()
 const connectionString =
   process.env.DATABASE_URL || `postgres://localhost:5432/remodel_estimator`;
 
-  const sslConfig = false;
-
 const db = new Client({
   connectionString,
-  ssl: sslConfig
+  ssl: process.env.NODE_ENV === "production"
+  ? { rejectUnauthorized: false }
+  : undefined,
 });
-
 
 export default db;

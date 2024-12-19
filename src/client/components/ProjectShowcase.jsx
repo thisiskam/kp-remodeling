@@ -57,12 +57,11 @@ export default function ProjectShowcase() {
     ];
 
     return (
-        <div className="container mt-5">
-            <h2 className="text-center mb-4">Our Projects</h2>
+        <div className="container moved-up">
             <div className="row">
                 {projects.map((project, index) => (
                     <div key={index} className="col-md-4 mb-4">
-                        <div className="card h-100">
+                        <div className="card h-100 border-0 mb-4">
                             <div
                                 id={`carousel-${index}`}
                                 className="carousel slide"
@@ -78,7 +77,7 @@ export default function ProjectShowcase() {
                                         >
                                             <img
                                                 src={image}
-                                                className="d-block w-100"
+                                                className="d-block w-100 img-fluid shadow-lg rounded"
                                                 alt={`Slide ${imgIndex + 1} of ${project.title}`}
                                             />
                                         </div>

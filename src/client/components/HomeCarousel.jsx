@@ -29,7 +29,10 @@ export default function HomeCarousel () {
     };
 
     return (
-        <>
+        <> 
+                <div className="align-items-center d-flex flex-column w-100" >
+                    <i className="bi bi-chevron-compact-down fs-1 mt-3"></i>
+                </div>
                 <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                     <div className="carousel-inner d-flex align-items-end max-height-800-px mt-5">
                         {images.map((image, index) => (

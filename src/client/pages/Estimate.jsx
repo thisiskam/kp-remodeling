@@ -10,7 +10,7 @@ export default function Estimate () {
     return (
         <> 
             <PageBanner bannerHeading={bannerHeading} bannerSubHeading={bannerSubHeading}/>
-            <div className="container w-100 mt-4">
+            <div className="container w-100 moved-up-more">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="row m-2">

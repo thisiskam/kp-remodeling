@@ -6,7 +6,7 @@ export default function Mission () {
     return (
         <>  
             <div className="d-flex align-items-center flex-column">
-                <i class="bi bi-chevron-compact-down fs-1 "></i>
+                <i className="bi bi-chevron-compact-down fs-1 "></i>
                 <div className="container-fluid d-flex flex-column align-items-center mt-5">
                     <h1 className="display-5 text-center mt-5 text-secondary mb-5">{missionTitle}</h1>
                     <div className="container-fluid w-75 mt-2 mx-lg-5 px-lg-5 px-0">
@@ -20,7 +20,7 @@ export default function Mission () {
                         </div>
                     </div>
                 </div>
-                <i class="bi bi-chevron-compact-down fs-1 mt-3"></i>
+                <i className="bi bi-chevron-compact-down fs-1 mt-3"></i>
             </div>
         </>
     )
