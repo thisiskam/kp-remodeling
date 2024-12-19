@@ -58,10 +58,10 @@ export default function BlogSingle () {
         <>
             <PageBanner />
             {blog && blogImages.length > 0 &&
-                <div className="d-flex align-items-center flex-column">
-                    <img src={blogImages[0].image_url} className="w-50 moved-up img-fluid shadow-lg rounded" style={{zIndex:9999}}/>
-                    <h1 className="py-5">{blog.title}</h1>
-                    <h5 className="fs-5 text-secondary">Posted on {formattedDate} by Kaleb Pete<img src="/kaleb-icon.jpg" className="icon-photo"/></h5>
+                <div className="d-flex align-items-center flex-column px-3">
+                    <img src={blogImages[0].image_url} className="w-75 moved-up img-fluid shadow-lg rounded" style={{zIndex:9999}}/>
+                    <h1 className="pt-5 pb-3 fs-1 text-center">{blog.title}</h1>
+                    <p className="text-secondary text-center">Posted on {formattedDate}<br/> by Kaleb Pete<img src="/kaleb-icon.jpg" className="icon-photo"/></p>
                 </div>
             }
         </>
