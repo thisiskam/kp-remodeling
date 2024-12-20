@@ -1,6 +1,8 @@
 import { useState , useEffect } from "react"
 import { useParams } from "react-router-dom"
 import PageBanner from "../components/PageBanner"
+import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function BlogSingle () {
     const { id } = useParams()
@@ -62,6 +64,12 @@ export default function BlogSingle () {
                     <img src={blogImages[0].image_url} className="w-75 moved-up img-fluid shadow-lg rounded" style={{zIndex:9999}}/>
                     <h1 className="pt-5 pb-3 fs-1 text-center">{blog.title}</h1>
                     <p className="text-secondary text-center">Posted on {formattedDate}<br/> by Kaleb Pete<img src="/kaleb-icon.jpg" className="icon-photo"/></p>
+                    <p className="fs-5 mt-5 col-11 col-sm-10 col-md-8">{blog.content}</p>
+                    {blogImages.slice(1).map((image) => (
+                        <img className="col-11 col-sm-10 col-md-8 m-3 img-fluid shadow-lg rounded"src={image.image_url} alt={blog.title + " image"}/>
+                    ))
+
+                    }
                 </div>
             }
         </>

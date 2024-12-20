@@ -245,31 +245,31 @@ const blogImages = [
     },
     {
         blog_id: "2",
-        image_url: "/blog/blog-image-tile-trims-6.jpeg"
+        image_url: "/blog/blog-image-tile-trims-6.jpg"
     },
     {
         blog_id: "2",
-        image_url: "/blog/blog-image-tile-trims-1.jpeg"
+        image_url: "/blog/blog-image-tile-trims-1.jpg"
     },
     {
         blog_id: "2",
-        image_url: "/blog/blog-image-tile-trims-2.jpeg"
+        image_url: "/blog/blog-image-tile-trims-2.jpg"
     },
     {
         blog_id: "2",
-        image_url: "/blog/blog-image-tile-trims-3.jpeg"
+        image_url: "/blog/blog-image-tile-trims-3.jpg"
     },
     {
         blog_id: "2",
-        image_url: "/blog/blog-image-tile-trims-4.jpeg"
+        image_url: "/blog/blog-image-tile-trims-4.jpg"
     },
     {
         blog_id: "2",
-        image_url: "/blog/blog-image-tile-trims-5.jpeg"
+        image_url: "/blog/blog-image-tile-trims-5.jpg"
     },
     {
         blog_id: "3",
-        image_url: "/blog/blog-image-kitchen-remodel-1.jpeg"
+        image_url: "/blog/blog-image-kitchen-remodel-1.jpg"
     }
 ]
 
