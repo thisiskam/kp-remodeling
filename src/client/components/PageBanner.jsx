@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function PageBanner({ bannerHeading, bannerSubHeading, logoSrc }) {
+    const navigate = useNavigate()
+
+
+    const handleLogoClick = () => {
+        console.log("you clicked it");
+        
+        navigate('/');
+        console.log("it worked");
+        
+    };
+
     return (
         <div
             className="jumbotron jumbotron-fluid text-white bg-dark position-relative"
@@ -12,16 +23,13 @@ export default function PageBanner({ bannerHeading, bannerSubHeading, logoSrc })
             }}
         >
             {/* Small Logo in Top Left Corner */}
-            <Link to='/'><img
-                src='/white-logo.png'
-                className="position-absolute top-0 start-0 p-2"
+            <img
+                src={'/white-logo.png' || logoSrc}
+                className="position-absolute top-0 start-0 p-2 col-4 col-sm-3 col-md-2 col-lg-1 m-1"
                 alt="Logo"
-                style={{
-                    width: '10%', 
-                    height: 'auto',
-                    margin: '1.5%'
-                }}
-            /></Link>
+                onClick={handleLogoClick}
+                style={{ zIndex: 9999}}
+            />
             
             <div className="container text-center">
                 <h1 className="display-3 fw-bold">{bannerHeading}</h1>

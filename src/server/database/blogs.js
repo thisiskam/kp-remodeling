@@ -1,13 +1,14 @@
 import db from "./client.js"
 
-const createBlogPost = async ({ title , content }) => {
+const createBlogPost = async ({ title , summary, header_img }) => {
     try {
         const SQL = /*sql*/ `
-            INSERT INTO blogs(title, content) VALUES ($1, $2) RETURNING *
+            INSERT INTO blogs(title, summary, header_img) VALUES ($1, $2, $3) RETURNING *
         `
         const response = await db.query(SQL, [
             title,
-            content,
+            summary,
+            header_img,
         ])
         return response.rows[0]
     } catch (error) {
@@ -15,14 +16,16 @@ const createBlogPost = async ({ title , content }) => {
     }
 }
 
-const addBlogImage = async ({ blog_id, image_url}) => {
+const addBlogContent = async ({ blog_id, content_type, content, position}) => {
     try {
         const SQL = /*sql*/ `
-            INSERT INTO blog_images(blog_id, image_url) VALUES ($1, $2) RETURNING *
+            INSERT INTO blog_content(blog_id, content_type, content, position) VALUES ($1, $2, $3 ,$4) RETURNING *
         `
         const response = await db.query(SQL, [
             blog_id,
-            image_url,
+            content_type, 
+            content, 
+            position
         ])
         return response.rows[0]
     } catch (error) {
@@ -30,29 +33,10 @@ const addBlogImage = async ({ blog_id, image_url}) => {
     }
 }
 
-const fetchBlogsWithHeaderImage = async () => {
+const fetchBlogs = async () => {
     try {
       const SQL = /*sql*/ `
-      SELECT 
-        b.id,
-        b.title, 
-        b.created_at, 
-        (SELECT image_url FROM blog_images WHERE blog_images.blog_id = b.id LIMIT 1) AS header_image,
-        trim(
-          regexp_replace(
-            array_to_string(
-              array(
-                SELECT unnest(string_to_array(b.content, ' ')) 
-                LIMIT 30
-              ), 
-              ' '
-            ), 
-            '\\s+', 
-            ' ', 
-            'g'
-          )
-        ) AS preview
-        FROM blogs b;
+      SELECT * FROM blogs
         `;
       const response = await db.query(SQL);
       console.log(response.rows);
@@ -65,50 +49,66 @@ const fetchBlogsWithHeaderImage = async () => {
 
   const fetchSingleBlog = async (blogId) => {
     try {
-      const SQL = /*sql*/ `
-    SELECT * FROM blogs WHERE id =$1
-    `;
-      const response = await db.query(SQL,[blogId]);
-      console.log(response.rows);
-      return response.rows;
+      const query = `
+        SELECT 
+          b.id AS blog_id,
+          b.title,
+          b.summary,
+          b.header_img,
+          b.created_at,
+          b.updated_at,
+          bc.id AS content_id,
+          bc.content_type,
+          bc.content,
+          bc.position
+        FROM 
+          blogs b
+        LEFT JOIN 
+          blog_content bc ON b.id = bc.blog_id
+        WHERE 
+          b.id = $1
+        ORDER BY 
+          bc.position;
+      `;
+      const result = await db.query(query, [blogId]);
+  
+      if (result.rows.length === 0) {
+        return null;
+      }
+  
+      const blog = {
+        id: result.rows[0].blog_id,
+        title: result.rows[0].title,
+        summary: result.rows[0].summary,
+        header_img: result.rows[0].header_img,
+        created_at: result.rows[0].created_at,
+        updated_at: result.rows[0].updated_at,
+        content: []
+      };
+  
+      result.rows.forEach(row => {
+        if (row.content_id) {
+          blog.content.push({
+            content_id: row.content_id,
+            content_type: row.content_type,
+            content: row.content,
+            position: row.position
+          });
+        }
+      });
+  
+      return blog;
+  
     } catch (error) {
-        console.log("error fetching blogs:", error);
+      console.error("Error fetching blog with content:", error);
       throw error;
     }
   };
 
-const fetchBlogImages = async (blogId) => {
-    try {
-        const SQL = /*sql*/ `
-        SELECT * FROM blog_images WHERE blog_id = $1
-        `;
-        const response = await db.query(SQL, [blogId])
-        return response.rows
-    } catch (error) {
-        console.log("unable to fetch blog images", error);
-        throw error;
-        
-    }
-}
-
-const fetchFirstBlogImage = async (blogId) => {
-    try {
-        const SQL = /*sql*/ `
-        SELECT * FROM blog_images WHERE blog_id = $1
-        `;
-        const response = await db.query(SQL, [blogId])
-        return response.rows[0]
-    } catch (error) {
-        console.log("unable to fetch blog images", error);
-        throw error;
-    }
-}
 
 export { 
     createBlogPost, 
-    addBlogImage,
-    fetchBlogsWithHeaderImage,
-    fetchBlogImages,
-    fetchFirstBlogImage,
+    addBlogContent,
+    fetchBlogs,
     fetchSingleBlog
 };

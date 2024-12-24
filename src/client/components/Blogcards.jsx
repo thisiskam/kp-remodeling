@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function Blogcards (page){
     const [blogs, setBlogs] = useState([]);
-    const [blogHeaderImage, setBlogHeaderImage] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate()
     
@@ -16,6 +15,7 @@ export default function Blogcards (page){
                     throw new Error("Failed to fetch blogs");
                   }
                   const data = await res.json();
+                  
                   setBlogs(data);
                   console.log("fetched blogs successfully");
                   
@@ -33,6 +33,16 @@ export default function Blogcards (page){
         const differenceInDays = Math.round((today - pastDate) / oneDay);
         return differenceInDays;
     }
+
+    function getFirst30Words(summary) {
+        // Split the summary by spaces into an array of words
+        const words = summary.split(' ');
+      
+        // Slice the array to get the first 30 words and join them back into a string
+        const first30Words = words.slice(0, 30).join(' ');
+      
+        return first30Words;
+      }
     
     return (
         <>
@@ -43,10 +53,10 @@ export default function Blogcards (page){
                 <div className="row mx-lg-5 px-lg-5 mx-2 px-2 mt-5"> 
                     {blogs && blogs.map((blog) => (
                         <div key={blog.id} className="col-12 col-md-4 card border-0 p-4 bg-transparent" onClick={() => navigate(`../blog/${blog.id}`)}>
-                            <img className="card-img-top rounded shadow-lg hover-shadow-lg" src={blog.header_image} alt={blog.title}/>
+                            <img className="card-img-top rounded shadow-lg hover-shadow-lg" src={blog.header_img} alt={blog.title}/>
                             <div className="card-body">
                                 <h5 className="card-title py-2">{blog.title}</h5>
-                                <p className="card-text">{blog.preview + "...  "}<a className="small-grey-link"><span>    </span> keep reading</a></p>
+                                <p className="card-text">{blog.summary}<a className="small-grey-link"><span>    </span> keep reading</a></p>
                                 <p className="card-text"><small className="text-muted">Posted {daysSinceBlogPost(blog.created_at)} days ago</small></p>
                             </div>
                         </div> 
@@ -57,10 +67,10 @@ export default function Blogcards (page){
                 <div className="row mx-lg-5 px-lg-5 mx-2 px-2 moved-up-more"> 
                 {blogs && blogs.map((blog) => (
                     <div key={blog.id} className="col-12 col-md-4 card border-0 p-4 bg-transparent" onClick={() => navigate(`../blog/${blog.id}`)}>
-                        <img className="card-img-top rounded shadow-lg hover-shadow-lg" src={blog.header_image} alt={blog.title}/>
+                        <img className="card-img-top rounded shadow-lg hover-shadow-lg" src={blog.header_img} alt={blog.title}/>
                         <div className="card-body">
                             <h5 className="card-title py-2">{blog.title}</h5>
-                            <p className="card-text">{blog.preview + "...  "}<a className="small-grey-link"><span>    </span> keep reading</a></p>
+                            <p className="card-text">{getFirst30Words(blog.summary) + "..."}<a className="small-grey-link"><span>    </span> keep reading</a></p>
                             <p className="card-text"><small className="text-muted">Posted {daysSinceBlogPost(blog.created_at)} days ago</small></p>
                         </div>
                     </div> 

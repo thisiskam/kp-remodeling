@@ -1,13 +1,11 @@
 import { useState , useEffect } from "react"
 import { useParams } from "react-router-dom"
 import PageBanner from "../components/PageBanner"
-import { DndProvider, useDrag, useDrop } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function BlogSingle () {
     const { id } = useParams()
     const [blog, setBlog] = useState()
-    const [blogImages, setBlogImages] = useState([])
+    const [blogContent, setBlogContent] = useState()
     const [formattedDate, setFormattedDate] = useState(null);
 
     useEffect (() => {
@@ -18,31 +16,19 @@ export default function BlogSingle () {
                     console.log("unable to fetch blog");
                 }
                 const data = await res.json()
-                setBlog(data[0])
+                setBlog(data)
+                setBlogContent(data.content)
+                
             } catch (error) {
                 console.log("error",error);
                 
             }
         }
-
-        const getBlogImages = async () => {
-            try {
-                const res = await fetch('/api/blog/' + id + '/images')
-                if(!res.ok) {
-                    console.log("unable to fetch blog images");
-                }
-                const data = await res.json()
-                console.log(data);
-                setBlogImages(data)
-            } catch (error) {
-                console.log("error",error);
-            }
-        }
-
         getSingleBlog()
-        getBlogImages()
     },[])
-
+    
+    console.log(blog);
+    
     useEffect(() => {
         if (blog && blog.created_at) {
             const date = new Date(blog.created_at);
@@ -59,17 +45,43 @@ export default function BlogSingle () {
     return (
         <>
             <PageBanner />
-            {blog && blogImages.length > 0 &&
+            {blog &&
                 <div className="d-flex align-items-center flex-column px-3">
-                    <img src={blogImages[0].image_url} className="w-75 moved-up img-fluid shadow-lg rounded" style={{zIndex:9999}}/>
+                    <img src={blog.header_img} className="w-75 moved-up img-fluid shadow-lg rounded" style={{zIndex:9999}}/>
                     <h1 className="pt-5 pb-3 fs-1 text-center">{blog.title}</h1>
                     <p className="text-secondary text-center">Posted on {formattedDate}<br/> by Kaleb Pete<img src="/kaleb-icon.jpg" className="icon-photo"/></p>
-                    <p className="fs-5 mt-5 col-11 col-sm-10 col-md-8">{blog.content}</p>
-                    {blogImages.slice(1).map((image) => (
-                        <img className="col-11 col-sm-10 col-md-8 m-3 img-fluid shadow-lg rounded"src={image.image_url} alt={blog.title + " image"}/>
-                    ))
-
-                    }
+                    <div className="article col-11 col-md-10 col-lg-9 col-xl-7 mt-5">
+                        {blogContent.map((item, index) => {
+                            if (item.content_type === "paragraph") {
+                                return (
+                                    <p className="d-inline" key={index}>{item.content}<br /><br /></p>
+                                )
+                            }
+                            if (item.content_type === "subheading") {
+                                return (
+                                    <h5 key={index} className="mt-5 mb-4">{item.content}</h5>
+                                )
+                            }
+                            if (item.content_type === "star point") {
+                                return (
+                                    <div className="mx-5 mt-2 mb-4" key={index}><p className="text-secondary">{item.content}</p></div>
+                                )
+                            }
+                            if (item.content_type === "bold span") {
+                                return (
+                                    <span className="fw-bold" key={index}>{item.content}  </span>
+                                )
+                            }
+                            if (item.content_type === "image") {
+                                return (
+                                    <img src={item.content} className="col-12 col-md-10 col-lg-9 d-block mx-auto rounded shadow-sm"/>
+                                )
+                            }
+                            else {
+                                
+                            }
+                        })}
+                    </div>   
                 </div>
             }
         </>
