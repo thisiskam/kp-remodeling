@@ -1,5 +1,5 @@
 import { useState , useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import PageBanner from "../components/PageBanner"
 
 export default function BlogSingle () {
@@ -7,6 +7,7 @@ export default function BlogSingle () {
     const [blog, setBlog] = useState()
     const [blogContent, setBlogContent] = useState()
     const [formattedDate, setFormattedDate] = useState(null);
+    const navigate = useNavigate()
 
     useEffect (() => {
         const getSingleBlog = async () => {
@@ -52,36 +53,28 @@ export default function BlogSingle () {
                     <p className="text-secondary text-center">Posted on {formattedDate}<br/> by Kaleb Pete<img src="/kaleb-icon.jpg" className="icon-photo"/></p>
                     <div className="article col-11 col-md-10 col-lg-9 col-xl-7 mt-5">
                         {blogContent.map((item, index) => {
-                            if (item.content_type === "paragraph") {
+                            if (item.content_type === "text") {
                                 return (
-                                    <p className="d-inline" key={index}>{item.content}<br /><br /></p>
+                                    <p className={`${item.bs_styles}`} key={index}>{item.content}</p>
                                 )
                             }
-                            if (item.content_type === "subheading") {
+                            if (item.content_type === "header") {
                                 return (
-                                    <h5 key={index} className="mt-5 mb-4">{item.content}</h5>
-                                )
-                            }
-                            if (item.content_type === "star point") {
-                                return (
-                                    <div className="mx-5 mt-2 mb-4" key={index}><p className="text-secondary">{item.content}</p></div>
-                                )
-                            }
-                            if (item.content_type === "bold span") {
-                                return (
-                                    <span className="fw-bold" key={index}>{item.content}  </span>
+                                    <h5 key={index} className={`mt-5 mb-4 ${item.bs_styles}`}>{item.content}</h5>
                                 )
                             }
                             if (item.content_type === "image") {
                                 return (
-                                    <img src={item.content} className="col-12 col-md-10 col-lg-9 d-block mx-auto rounded shadow-sm"/>
+                                    <img src={item.content} className={`col-12 col-md-10 col-lg-9 d-block mx-auto rounded shadow-sm${item.bs_styles}`}/>
                                 )
                             }
                             else {
                                 
                             }
                         })}
-                    </div>   
+                    </div> 
+                    <p className="mt-5 text-secondary">- End of article -</p>
+                    <button className="btn btn-dark" onClick={() => navigate('../blog')}> Read More Blogs </button>  
                 </div>
             }
         </>

@@ -16,16 +16,17 @@ const createBlogPost = async ({ title , summary, header_img }) => {
     }
 }
 
-const addBlogContent = async ({ blog_id, content_type, content, position}) => {
+const addBlogContent = async ({ blog_id, content_type, content, position, bs_styles}) => {
     try {
         const SQL = /*sql*/ `
-            INSERT INTO blog_content(blog_id, content_type, content, position) VALUES ($1, $2, $3 ,$4) RETURNING *
+            INSERT INTO blog_content(blog_id, content_type, content, position, bs_styles) VALUES ($1, $2, $3, $4, $5) RETURNING *
         `
         const response = await db.query(SQL, [
             blog_id,
             content_type, 
             content, 
-            position
+            position,
+            bs_styles
         ])
         return response.rows[0]
     } catch (error) {
@@ -60,7 +61,8 @@ const fetchBlogs = async () => {
           bc.id AS content_id,
           bc.content_type,
           bc.content,
-          bc.position
+          bc.position,
+          bc.bs_styles
         FROM 
           blogs b
         LEFT JOIN 
@@ -92,7 +94,8 @@ const fetchBlogs = async () => {
             content_id: row.content_id,
             content_type: row.content_type,
             content: row.content,
-            position: row.position
+            position: row.position,
+            bs_styles: row.bs_styles
           });
         }
       });
