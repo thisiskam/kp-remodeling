@@ -6,11 +6,37 @@ export default function Login () {
     return (
         <>
             <PageBanner />
-            <div className="container col-6 justify-content-center align-items-center d-flex flex-column h-100 border border-2 border-dark bg-white moved-up rounded" style={{ zIndex: 9999, position: 'relative'}}>
-                <h1 className="my-2">Login</h1>
-                <button className="btn btn-dark my-2" onClick={() => navigate('../admin')}>
-                    Login
-                </button>  
+            <div className="container col-10 col-lg-5 col-md-7 col-sm-9 justify-content-center align-items-center d-flex flex-column h-100 border border-2 border-dark bg-white moved-up rounded shadow" style={{ zIndex: 9999, position: 'relative'}}>
+                <h1 className="mt-4 mb-4">Login</h1>
+                <form>
+                {/* Email Input */}
+                    <div className="form-outline mb-4">
+                        <input
+                        type="id"
+                        id="idInput"
+                        className="form-control"
+                        placeholder="ID"
+                        />
+                    </div>
+
+                    {/* Password Input */}
+                    <div className="form-outline mb-4">
+                        <input
+                        type="password"
+                        id="passwordInput"
+                        className="form-control"
+                        placeholder="Password"
+                        />
+                    </div>
+                    {/* Submit Button */}
+                    <button
+                        type="submit"
+                        className="btn btn-secondary btn-block w-100 mb-5 mt-4"
+                        onClick={() => navigate('../admin')}
+                    >
+                        Sign In
+                    </button>
+                </form>
             </div>
         </>
     )
