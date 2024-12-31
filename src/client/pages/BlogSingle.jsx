@@ -55,7 +55,7 @@ export default function BlogSingle () {
                         {blogContent.map((item, index) => {
                             if (item.content_type === "text") {
                                 return (
-                                    <p className={`${item.bs_styles}`} key={index}>{item.content}</p>
+                                    <p className={`${item.bs_styles} mb-4`} key={index}>{item.content}</p>
                                 )
                             }
                             if (item.content_type === "header") {
@@ -65,7 +65,8 @@ export default function BlogSingle () {
                             }
                             if (item.content_type === "image") {
                                 return (
-                                    <img src={item.content} className={`col-12 col-md-10 col-lg-9 d-block mx-auto rounded shadow-sm${item.bs_styles}`}/>
+                                    <img src={item.content} className={`col-12 col-md-10 col-lg-9 d-block mx-auto my-5
+                                         rounded shadow-sm${item.bs_styles}`}/>
                                 )
                             }
                             else {

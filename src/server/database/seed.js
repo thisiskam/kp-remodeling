@@ -1,7 +1,10 @@
 import db from "./client.js"
 import { 
     createBlogPost, 
-    addBlogContent } from "./blogs.js";
+    addBlogContent, } from "./blogs.js";
+import {
+    createAdmin
+} from "./admin.js"
 
 // ----- CREATE TABLES ---------------------------------------------------------------------------
 
@@ -101,6 +104,41 @@ const createTables = async () => {
         console.log("Tables created successfully!");
     } catch (error) {
         console.error("Error creating tables:", error);
+    }
+}
+
+//----- USER DATA -------------------------------------------------------------------
+
+const admins = [
+    {
+        username: 1001,
+        password: "TheCreator12"
+    },
+    {
+        username: 1002,
+        password: "TheOwner57"
+    },
+    {
+        username: 1003,
+        password: "TheManager92"
+    }
+]
+
+//----- SEED ADMINS -------------------------------------------------------------------
+
+const insertAdmins = async () => {
+    try {
+        for (const admin of admins) {
+            await createAdmin({
+                username: admin.username,
+                password: admin.password
+            })
+        }
+        console.log("admins seeded successfully ");
+        
+    } catch (error) {
+        console.log(error, "unable to seed admins");
+        
     }
 }
 
@@ -610,6 +648,7 @@ const seedDatabase = async () => {
         await createTables();
         await insertBlogs();
         await insertBlogContent();
+        await insertAdmins();
     } catch (error) {
         throw error;
     } finally {

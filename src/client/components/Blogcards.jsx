@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function Blogcards (page){
     const [blogs, setBlogs] = useState([]);
-    const [error, setError] = useState(null);
     const navigate = useNavigate()
     
 
@@ -20,7 +19,7 @@ export default function Blogcards (page){
                   console.log("fetched blogs successfully");
                   
             } catch (error) {
-                setError(error.message);
+                console.error(error)
             }  
         };
         fetchBlogs();
