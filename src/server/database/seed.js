@@ -3,8 +3,11 @@ import {
     createBlogPost, 
     addBlogContent, } from "./blogs.js";
 import {
-    createAdmin
-} from "./admin.js"
+    createAdmin} from "./admin.js";
+import {
+    createPreviousWork,
+    createPreviousWorkImage} from "./portfolio.js"
+import { Await } from "react-router-dom";
 
 // ----- CREATE TABLES ---------------------------------------------------------------------------
 
@@ -639,8 +642,484 @@ const insertBlogContent = async () => {
         
     }
 }
-//----- START SEED -------------------------------------------------------------------
 
+//----- INITIAL PREVIOUS_WORK DATA ---------------------------------------------------
+const previousWork = [
+    {
+        title:"Luxury Bathroom",
+        description:"In this bathroom we modernized a 90's built bathroom into one our customer wanted to 'live in'. "
+    },
+    {
+        title:"Full Bathroom Remodel",
+        description:"In this bathroom remodel some unique things were done, two showerheads, herringbone tile just to name a few."
+    },
+    {
+        title:"Cozy Kitchen Remodel",
+        description:"This remodel featured fresh cabinets (custom painted), new countertops, and tile floors."
+    },
+    {
+        title:"Throwback Kitchen Remodel",
+        description:"Its your kitchen, pick finishes YOU like. In this remodel our customer went back in time for some style choices, and it works!"
+    },
+    {
+        title:"Small bath, Lots of tile",
+        description:"Just cause the bathroom is small, doesnt mean it has to be basic. In this one we went up the walls with tile."
+    },
+    {
+        title:"Small Bathroom Renovations",
+        description:"Heres a look at some of the bathroom renovations weve done over the years"
+    },
+    {
+        title:"Showers, Showers, Showers",
+        description:"You can say its our specialty, from steam showers to tub surrounds, weve done it all. Check it out."
+    },
+    {
+        title:"Paint Projects",
+        description:"Nothing makes a home feel fresher than a new coat of paint, heres some of our paint projects."
+    },
+    {
+        title:"Kitchen Backsplashes",
+        description:"We've done an array of different tile schemes in kitchens, heres a look."
+    },
+    
+]
+
+//----- INSERT PREVIOUS_WORK ---------------------------------------------------------
+
+const insertPreviousWork = async () => {
+    try{
+        for (const item of previousWork) {
+            await createPreviousWork({
+                title: item.title,
+                description: item.description
+            })
+        }
+        console.log("previous work seeded successfully");
+    } catch(error) {
+        console.log("unable to seed previous work", error);
+    }
+}
+
+//----- INITIAL PREVIOUS_WORK_IMAGES -------------------------------------------------
+
+const previousWorkImages = [
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_5.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_4.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_2.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_3.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_6.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_7.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_8.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_9.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_10.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_11.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_12.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_13.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_14.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_15.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_16.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_17.jpeg"
+    },
+    {
+        workId:"1",
+        imageUrl:"/portfolio/tony_18.jpeg"
+    },
+    {
+        workId:"2",
+        imageUrl:"/portfolio/sean_4.jpeg"
+    },
+    {
+        workId:"2",
+        imageUrl:"/portfolio/sean_1.jpeg"
+    },
+    {
+        workId:"2",
+        imageUrl:"/portfolio/sean_2.jpeg"
+    },
+    {
+        workId:"2",
+        imageUrl:"/portfolio/sean_3.jpeg"
+    },
+    {
+        workId:"2",
+        imageUrl:"/portfolio/sean_5.jpeg"
+    },
+    {
+        workId:"2",
+        imageUrl:"/portfolio/sean_6.jpeg"
+    },
+    {
+        workId:"2",
+        imageUrl:"/portfolio/sean_7.jpeg"
+    },
+    {
+        workId:"2",
+        imageUrl:"/portfolio/sean_8.jpeg"
+    },
+    {
+        workId:"3",
+        imageUrl:"/portfolio/greenkitchen_1.jpeg"
+    },
+    {
+        workId:"3",
+        imageUrl:"/portfolio/greenkitchen_2.jpeg"
+    },
+    {
+        workId:"3",
+        imageUrl:"/portfolio/greenkitchen_3.jpeg"
+    },
+    {
+        workId:"3",
+        imageUrl:"/portfolio/greenkitchen_4.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_2.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_1.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_3.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_4.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_5.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_6.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_7.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_8.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_9.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_10.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_11.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_12.jpeg"
+    },
+    {
+        workId:"4",
+        imageUrl:"/portfolio/yellowkitchen_13.jpeg"
+    },
+    {
+        workId:"5",
+        imageUrl:"/portfolio/tinybath_5.jpeg"
+    },
+    {
+        workId:"5",
+        imageUrl:"/portfolio/tinybath_1.jpeg"
+    },
+    {
+        workId:"5",
+        imageUrl:"/portfolio/tinybath_2.jpeg"
+    },
+    {
+        workId:"5",
+        imageUrl:"/portfolio/tinybath_3.jpeg"
+    },
+    {
+        workId:"5",
+        imageUrl:"/portfolio/tinybath_4.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_6.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_4.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_1a.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_1b.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_2a.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_2b.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_2c.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_2d.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_3a.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_3b.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_3c.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_5a.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_5b.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_8a.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_8b.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_8c.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_8d.jpeg"
+    },
+    {
+        workId:"6",
+        imageUrl:"/portfolio/smallbath_8e.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_6.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_1.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_2.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_3.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_4.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_5a.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_5b.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_7.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_8.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_9a.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_9b.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_10.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_11.jpeg"
+    },
+    {
+        workId:"7",
+        imageUrl:"/portfolio/shower_12.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_1.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_2.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_3.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_4.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_5.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_6.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_7.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_8.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_9.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_10.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_11.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_12.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_13.jpeg"
+    },
+    {
+        workId:"8",
+        imageUrl:"/portfolio/painting_14.jpeg"
+    },
+    {
+        workId:"9",
+        imageUrl:"/portfolio/backsplash_1.jpeg"
+    },
+    {
+        workId:"9",
+        imageUrl:"/portfolio/backsplash_2a.jpeg"
+    },
+    {
+        workId:"9",
+        imageUrl:"/portfolio/backsplash_2b.jpeg"
+    },
+    {
+        workId:"9",
+        imageUrl:"/portfolio/backsplash_2c.jpeg"
+    },
+    {
+        workId:"9",
+        imageUrl:"/portfolio/backsplash_3.jpeg"
+    },
+    {
+        workId:"9",
+        imageUrl:"/portfolio/backsplash_4.jpeg"
+    },
+    
+]
+
+//----- SEED PREVIOUS_WORK_IMAGES ----------------------------------------------------
+
+const insertPreviousWorkImages = async () => {
+    try {
+        for(const item of previousWorkImages) {
+            await createPreviousWorkImage({
+                previousWorkId: item.workId,
+                imageUrl: item.imageUrl
+            })
+        }
+        console.log("previous work images seeded successfully");
+        
+    } catch (error) {
+        console.log("unable to seed previous work images", error);
+    }
+}
+
+//----- START SEED -------------------------------------------------------------------
 const seedDatabase = async () => {
     try {
         db.connect();
@@ -649,6 +1128,8 @@ const seedDatabase = async () => {
         await insertBlogs();
         await insertBlogContent();
         await insertAdmins();
+        await insertPreviousWork();
+        await insertPreviousWorkImages();
     } catch (error) {
         throw error;
     } finally {

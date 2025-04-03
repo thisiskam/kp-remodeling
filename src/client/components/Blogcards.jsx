@@ -10,9 +10,6 @@ export default function Blogcards (page){
         const fetchBlogs = async () => {
             try {
                 const res = await fetch("/api/blog");
-                if (!res.ok) {
-                    throw new Error("Failed to fetch blogs");
-                  }
                   const data = await res.json();
                   
                   setBlogs(data);

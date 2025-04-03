@@ -3,17 +3,17 @@ export default function Testimonials() {
         {
             name: 'John Doe',
             feedback: 'The team did an amazing job on our kitchen remodel. Highly recommend!',
-            img: 'google.svg',
+            img: '/google.svg',
         },
         {
             name: 'Jane Smith',
             feedback: 'Our living room looks fantastic! Thank you for your hard work.',
-            img: 'angi.svg',
+            img: '/angi.svg',
         },
         {
             name: 'Michael Brown',
             feedback: 'The patio transformation is beyond our expectations. Great work!',
-            img: 'google.svg',
+            img: '/google.svg',
         },
     ];
 

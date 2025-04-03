@@ -1,71 +1,30 @@
+import { useEffect, useState } from "react";
+
 export default function ProjectShowcase() {
-    const projects = [
-        {
-            title: 'Modern Kitchen Design',
-            description: 'A sleek and modern kitchen with cutting-edge appliances and custom cabinetry.',
-            images: [
-                'bathroom-one.jpg',
-                'bathroom-two.jpg',
-                'bathroom-three.jpg',
-            ],
-        },
-        {
-            title: 'Elegant Living Room',
-            description: 'A cozy and elegant living room perfect for family gatherings.',
-            images: [
-                'bathroom-one.jpg',
-                'bathroom-two.jpg',
-                'bathroom-three.jpg',
-            ],
-        },
-        {
-            title: 'Outdoor Patio Transformation',
-            description: 'A stunning outdoor space designed for relaxation and entertainment.',
-            images: [
-                'bathroom-one.jpg',
-                'bathroom-two.jpg',
-                'bathroom-three.jpg',
-            ],
-        },
-        {
-            title: 'Modern Kitchen Design',
-            description: 'A sleek and modern kitchen with cutting-edge appliances and custom cabinetry.',
-            images: [
-                'bathroom-one.jpg',
-                'bathroom-two.jpg',
-                'bathroom-three.jpg',
-            ],
-        },
-        {
-            title: 'Modern Kitchen Design',
-            description: 'A sleek and modern kitchen with cutting-edge appliances and custom cabinetry.',
-            images: [
-                'bathroom-one.jpg',
-                'bathroom-two.jpg',
-                'bathroom-three.jpg',
-            ],
-        },
-        {
-            title: 'Modern Kitchen Design',
-            description: 'A sleek and modern kitchen with cutting-edge appliances and custom cabinetry.',
-            images: [
-                'bathroom-one.jpg',
-                'bathroom-two.jpg',
-                'bathroom-three.jpg',
-            ],
-        },
-    ];
+    const [projects, setProjects] = useState([])
+
+    useEffect (() => {
+        const getPortfolios = async () => {
+            try {
+                const res = await fetch("/api/portfolio")
+                const data = await res.json()
+                setProjects(data)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getPortfolios()
+    },[])
 
     return (
         <div className="container moved-up">
             <div className="row">
-                {projects.map((project, index) => (
-                    <div key={index} className="col-md-4 mb-4">
+                {projects && projects.map((project) => (
+                    <div key={project.id} className="col-md-4 mb-4">
                         <div className="card h-100 border-0 mb-4">
                             <div
-                                id={`carousel-${index}`}
+                                id={`carousel-${project.id}`}
                                 className="carousel slide"
-                                data-bs-ride="carousel"
                             >
                                 <div className="carousel-inner">
                                     {project.images.map((image, imgIndex) => (
@@ -75,9 +34,8 @@ export default function ProjectShowcase() {
                                                 imgIndex === 0 ? 'active' : ''
                                             }`}
                                         >
-                                            <img
-                                                src={image}
-                                                className="d-block w-100 img-fluid shadow-lg rounded"
+                                            <img src={image}
+                                                className="d-block w-100 rounded"
                                                 alt={`Slide ${imgIndex + 1} of ${project.title}`}
                                             />
                                         </div>
@@ -86,7 +44,7 @@ export default function ProjectShowcase() {
                                 <button
                                     className="carousel-control-prev"
                                     type="button"
-                                    data-bs-target={`#carousel-${index}`}
+                                    data-bs-target={`#carousel-${project.id}`}
                                     data-bs-slide="prev"
                                 >
                                     <span
@@ -98,7 +56,7 @@ export default function ProjectShowcase() {
                                 <button
                                     className="carousel-control-next"
                                     type="button"
-                                    data-bs-target={`#carousel-${index}`}
+                                    data-bs-target={`#carousel-${project.id}`}
                                     data-bs-slide="next"
                                 >
                                     <span
@@ -110,12 +68,12 @@ export default function ProjectShowcase() {
                             </div>
                             <div className="card-body">
                                 <h5 className="card-title">{project.title}</h5>
-                                <p className="card-text">{project.description}</p>
+                                <p className="card-text">{project.work_description}</p>
                             </div>
                         </div>
                     </div>
-                ))}
-            </div>
+            ))}
+        </div>
         </div>
     );
 }
