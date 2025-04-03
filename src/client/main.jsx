@@ -11,6 +11,7 @@ import Portfolio from './pages/Portfolio';
 import BlogSingle from './pages/BlogSingle';
 import Login from './pages/Login';
 import Admin from './pages/admin';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import Layout from './Layout';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
         { path: 'portfolio', element: <Portfolio /> },
         { path: 'login', element: <Login /> },
         { path: 'admin', element: <Admin /> },
+        { path: 'privacy-policy', element: <PrivacyPolicy /> },
       ],
     },
   ],

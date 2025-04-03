@@ -138,6 +138,7 @@ export default function ContactForm() {
           <button type="submit" className="btn btn-primary w-100">
             Send
           </button>
+          <a href="/privacy-policy" className='small-grey-link text-decoration-underline text-secondary'>Privacy Policy</a>
         </form>
       </div>
 
