@@ -58,6 +58,10 @@ export default function PrivacyPolicy() {
                 <p>If you have any questions about this Privacy Policy, please contact us at:</p>
                 <p><strong>KP Home Remodeling LLC</strong></p>
                 <p>Email: <a className="text-secondary text-decoration-underline" href="mailto:Kphomeremodeling@outlook.com">Kphomeremodeling@outlook.com</a></p>
+
+                <p>attributions</p>
+                <a href="http://www.freepik.com">Designed by macrovector / Freepik</a><br/>
+                <a href="https://www.vecteezy.com/free-vector/oceanside">Oceanside Vectors by Vecteezy</a>
             </div>
             </div>
         </>

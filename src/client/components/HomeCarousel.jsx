@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function HomeCarousel() {
     const [images, setImages] = useState([]);
-    const [imageStyles, setImageStyles] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getImages = async () => {
@@ -14,24 +14,6 @@ export default function HomeCarousel() {
                 }
                 const data = await res.json();
                 setImages(data);
-
-                // Define grid-based positioning
-                const rows = 4; // Number of rows
-                const cols = 5; // Number of columns
-                const gap = 20; // Space between images
-
-                const styles = data.map((_, index) => {
-                    const row = Math.floor(index / cols); // Row index
-                    const col = index % cols; // Column index
-
-                    return {
-                        top: `${row * (220 + gap)}px`, // Space images vertically
-                        left: `${col * (220 + gap)}px`, // Space images horizontally
-                        zIndex: index, // Keep stacking order
-                    };
-                });
-
-                setImageStyles(styles);
             } catch (error) {
                 console.error(error);
             }
@@ -41,22 +23,43 @@ export default function HomeCarousel() {
     }, []);
 
     return (
-        <div className="collage-container">
-            {/* {images.map((image, index) => (
-                <img
-                    key={index}
-                    src={image}
-                    alt={`Collage Image ${index + 1}`}
-                    className="collage-image"
-                    style={{
-                        ...imageStyles[index],
-                        position: "absolute",
-                        transition: "transform 0.4s ease-in-out, z-index 0.1s",
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.zIndex = 100}
-                    onMouseLeave={(e) => e.currentTarget.style.zIndex = imageStyles[index]?.zIndex}
-                />
-            ))} */}
+        <div className="container py-4 px-4 align-items-center d-flex flex-column my-5">
+            <h1 className="display-5 mb-5 text-secondary text-center">Check out Some Of Our Past Work</h1>
+            <div className="row g-3">
+                {images.map((img, index) => (
+                    <div
+                        key={index}
+                        className="col-6 col-sm-6 col-md-3 col-lg-3"
+                        onClick={() => navigate(`/portfolio`)}
+                        style={{ cursor: "pointer" }}
+                    >
+                        <div className="hover-grow rounded shadow-sm overflow-hidden">
+                            <img
+                                src={img}
+                                alt={`portfolio-${index}`}
+                                className="img-fluid"
+                                style={{
+                                    height: "120px",
+                                    objectFit: "cover",
+                                    width: "100%",
+                                }}
+                            />
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <style>{`
+                .hover-grow {
+                    transition: transform 0.3s ease;
+                }
+
+                .hover-grow:hover {
+                    transform: scale(1.1);
+                    z-index: 2;
+                }
+            `}</style>
+            <i className="bi bi-chevron-compact-down fs-1 mt-5"></i>
         </div>
     );
 }

@@ -34,7 +34,6 @@ export default function Footer() {
         <div className="row mt-3">
           <div className="col-12 text-center">
             <p className="mb-0"><span style={{ cursor: 'pointer' }} onClick={() => navigate('../login')}>&copy;</span> {new Date().getFullYear()} Your Company. All rights reserved.</p>
-            <a href="https://www.vecteezy.com/free-vector/oceanside">Oceanside Vectors by Vecteezy</a>
           </div>
         </div>
       </div>

@@ -42,38 +42,67 @@ export default function Blogcards (page){
     
     return (
         <>
-            <div className="align-items-center d-flex flex-column">
-                {page.page === "home" ? 
-                <>
-                <h1 className="display-5 mt-5 text-secondary">From Our Blog</h1>
-                <div className="row mx-lg-5 px-lg-5 mx-2 px-2 mt-5"> 
-                    {blogs && blogs.map((blog) => (
-                        <div key={blog.id} className="col-12 col-md-4 card border-0 p-4 bg-transparent" onClick={() => navigate(`../blog/${blog.id}`)}>
-                            <img className="card-img-top rounded shadow-lg hover-shadow-lg" src={blog.header_img} alt={blog.title}/>
-                            <div className="card-body">
-                                <h5 className="card-title py-2">{blog.title}</h5>
-                                <p className="card-text">{blog.summary}<a className="small-grey-link"><span>    </span> keep reading</a></p>
-                                <p className="card-text"><small className="text-muted">Posted {daysSinceBlogPost(blog.created_at)} days ago</small></p>
-                            </div>
-                        </div> 
-                    ))}
-                </div> 
-                </>
-                : 
-                <div className="row mx-lg-5 px-lg-5 mx-2 px-2 moved-up-more"> 
-                {blogs && blogs.map((blog) => (
-                    <div key={blog.id} className="col-12 col-md-4 card border-0 p-4 bg-transparent" onClick={() => navigate(`../blog/${blog.id}`)}>
-                        <img className="card-img-top rounded shadow-lg hover-shadow-lg" src={blog.header_img} alt={blog.title}/>
-                        <div className="card-body">
-                            <h5 className="card-title py-2">{blog.title}</h5>
-                            <p className="card-text">{getFirst30Words(blog.summary) + "..."}<a className="small-grey-link"><span>    </span> keep reading</a></p>
-                            <p className="card-text"><small className="text-muted">Posted {daysSinceBlogPost(blog.created_at)} days ago</small></p>
+        <div className="align-items-center d-flex flex-column mx-5">
+            <div style={{ maxWidth: "1200px", width: "100%", margin: "0 auto" }}>
+                {page.page === "home" ? (
+                    <>
+                        <h1 className="display-5 mt-5 text-secondary text-center">From Our Blog</h1>
+                        <div className="row mt-5 d-flex justify-content-center">
+                            {blogs && blogs.map((blog) => (
+                                <div
+                                    key={blog.id}
+                                    className="col-sm-10 col-12 col-md-4 card border-0 p-4 bg-transparent"
+                                    onClick={() => navigate(`../blog/${blog.id}`)}
+                                >
+                                    <img
+                                        className="card-img-top rounded shadow-lg hover-shadow-lg"
+                                        src={blog.header_img}
+                                        alt={blog.title}
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title py-2">{blog.title}</h5>
+                                        <p className="card-text">
+                                            {blog.summary}
+                                            <a className="small-grey-link"><span> </span>keep reading</a>
+                                        </p>
+                                        <p className="card-text">
+                                            <small className="text-muted">Posted {daysSinceBlogPost(blog.created_at)} days ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    </div> 
-                ))}
-                </div>
-                }
+                    </>
+                ) : (
+                    <div className="row moved-up-more">
+                        {blogs && blogs.map((blog) => (
+                            <div
+                                key={blog.id}
+                                className="col-12 col-md-4 card border-0 p-4 bg-transparent"
+                                onClick={() => navigate(`../blog/${blog.id}`)}
+                            >
+                                <img
+                                    className="card-img-top rounded shadow-lg hover-shadow-lg"
+                                    src={blog.header_img}
+                                    alt={blog.title}
+                                />
+                                <div className="card-body">
+                                    <h5 className="card-title py-2">{blog.title}</h5>
+                                    <p className="card-text">
+                                        {getFirst30Words(blog.summary) + "..."}
+                                        <a className="small-grey-link"><span> </span>keep reading</a>
+                                    </p>
+                                    <p className="card-text">
+                                        <small className="text-muted">Posted {daysSinceBlogPost(blog.created_at)} days ago</small>
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
-        </>
+            <i className="bi bi-chevron-compact-down fs-1 mt-3"></i>
+        </div>
+    </>
     ) 
 }

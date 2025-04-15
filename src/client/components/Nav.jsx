@@ -20,13 +20,13 @@ export default function Nav () {
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul className="navbar-nav text-end ms-auto">
-                        <li className="nav-item fs-5">
+                        <li className="nav-item fs-4">
                             <Link className="nav-link" to="/portfolio">Portfolio</Link>
                         </li>
-                        <li className="nav-item fs-5">
+                        <li className="nav-item fs-4">
                             <Link className="nav-link" to="/estimate">Estimate</Link>
                         </li>
-                        <li className="nav-item fs-5">
+                        <li className="nav-item fs-4">
                             <Link className="nav-link" to="/blog">Blog</Link>
                         </li>
                     </ul>

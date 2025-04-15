@@ -6,14 +6,29 @@
     color: rgb(44, 42, 42) !important;
   }
 
-.jumbotron-background {
-    background-image: url('bathroom-five.jpg');
+  .jumbotron-background {
+    background-image: url('bathroom-four.jpg');
     background-size: cover;
     background-position: center;
     height: 720px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .jumbotron-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* adjust darkness here */
+    z-index: 1;
+  }
+
+  .jumbotron-content {
+    z-index: 2;
   }
 
 .max-height-800-px {
@@ -44,3 +59,18 @@
   padding-left: 10px;
 }
 
+
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.coral-bg {
+  background-color: coral;
+}
+
+.coral-bg:hover {
+  background-color: #f55555;
+}
