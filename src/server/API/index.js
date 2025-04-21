@@ -3,6 +3,7 @@ import volleyball from "volleyball"
 import { blogRouter } from "./blogs.js"
 import { adminRouter } from "./admin.js";
 import { portfolioRouter } from "./portfolio.js";
+import { testimonialRouter } from "./testimonials.js";
 
 const apiRouter = express.Router();
 
@@ -13,6 +14,8 @@ apiRouter.use("/blog", blogRouter);
 apiRouter.use("/admin", adminRouter)
 
 apiRouter.use("/portfolio", portfolioRouter)
+
+apiRouter.use("/testimonials", testimonialRouter)
 
 //error handling
 apiRouter.use((err, req, res, next) => {

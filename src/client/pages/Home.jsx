@@ -2,7 +2,7 @@ import HomeBanner from "../components/HomeBanner"
 import Mission from "../components/Mission"
 import Blogcards from "../components/Blogcards"
 import HomeCarousel from "../components/HomeCarousel"
-import Google from "../components/Google";
+import GooglePresenceBox from "../components/Google";
 
 export default function Home () {
     return (
@@ -11,7 +11,7 @@ export default function Home () {
             <Mission />
             <Blogcards page="home"/>
             <HomeCarousel/>
-            <Google />
+            <GooglePresenceBox />
         </>
     )
 } 

@@ -7,7 +7,9 @@ import {
 import {
     createPreviousWork,
     createPreviousWorkImage} from "./portfolio.js"
-import { Await } from "react-router-dom";
+import {
+    createTestimonialType,
+    createTestimonial} from "./testimonials.js"
 
 // ----- CREATE TABLES ---------------------------------------------------------------------------
 
@@ -25,6 +27,8 @@ const dropTables = async () => {
             DROP TABLE IF EXISTS blog_content CASCADE;
             DROP TABLE IF EXISTS previous_work_images CASCADE;
             DROP TABLE IF EXISTS previous_work CASCADE;
+            DROP TABLE IF EXISTS testimonials CASCADE;
+            DROP TABLE IF EXISTS testimonial_type CASCADE;
             `)
             console.log("tables dropped successfully");
             
@@ -95,13 +99,26 @@ const createTables = async () => {
                 total_price NUMERIC(10, 2) NOT NULL DEFAULT 0
             );
             CREATE TABLE quote_work_categories (
-              id SERIAL PRIMARY KEY,
-              quote_id INTEGER REFERENCES quotes(id) ON DELETE CASCADE,
-              category_id INTEGER REFERENCES work_categories(id) ON DELETE CASCADE,
-              finish_id INTEGER REFERENCES finishes(id),
-              quantity NUMERIC(10, 2) NOT NULL,
-              unit_price NUMERIC(10, 2) NOT NULL,
-              total_price NUMERIC(10, 2) NOT NULL
+                id SERIAL PRIMARY KEY,
+                quote_id INTEGER REFERENCES quotes(id) ON DELETE CASCADE,
+                category_id INTEGER REFERENCES work_categories(id) ON DELETE CASCADE,
+                finish_id INTEGER REFERENCES finishes(id),
+                quantity NUMERIC(10, 2) NOT NULL,
+                unit_price NUMERIC(10, 2) NOT NULL,
+                total_price NUMERIC(10, 2) NOT NULL
+            );
+            CREATE TABLE testimonial_type(
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                link TEXT,
+                image_url VARCHAR(1000) NOT NULL
+            );
+            CREATE TABLE testimonials(
+                id SERIAL PRIMARY KEY,
+                customer VARCHAR(255) NOT NULL,
+                review TEXT NOT NULL,
+                review_type INTEGER NOT NULL REFERENCES testimonial_type(id),
+                review_date DATE DEFAULT CURRENT_DATE
             );
             `)
         console.log("Tables created successfully!");
@@ -1119,6 +1136,167 @@ const insertPreviousWorkImages = async () => {
     }
 }
 
+//----- TESTIMONIAL TYPES ------------------------------------------------------------
+
+const testimonialTypes = [
+    {
+        name:"angi",
+        link:"https://www.angi.com/companylist/us/or/portland/crown-point-tile-reviews-10741345.htm",
+        image_url:"/angi.svg"
+    },
+    {
+        name:"google",
+        link:"https://g.co/kgs/JEXYTec",
+        image_url:"/google.svg"
+    }
+
+]
+
+//----- SEED TESTIMONIAL TYPES -------------------------------------------------------
+
+const insertTestimonialTypes = async () => {
+    try {
+        for(const item of testimonialTypes) {
+            await createTestimonialType({
+                name: item.name,
+                link: item.link,
+                image_url: item.image_url,
+            })
+        }
+        console.log("testimonial types seeded successfully");
+        
+    } catch (error) {
+        console.log("unable to seed previous work images", error);
+    }
+}
+
+//----- TESTIMONIALS -----------------------------------------------------------------
+
+const testimonials = [
+    {
+        customer:"Hayley R.",
+        review:"Kaleb responded to my inquiry right away. He was able to provide a virtual quote after I sent him dimensions and images of both the wall area and tile. He was very responsive and kept me informed from initial contact through completion of the project. I’m very pleased and impressed with his work. He was very meticulous and took his time. Pricing was the best out of all bids I received. I know I’ll be using them for future projects.",
+        review_type:"1",
+        review_date:"2024-06-01",
+    },
+    {
+        customer:"Judith G.",
+        review:"Kaleb is probably the contractor most everyone hopes to meet, but so seldom do. He has good communication skills. He's prompt and on time. He's careful and respectful of your property. And he's VERY talented at what he does. Due to a water leak, I had to get a bathroom in my house. Very quickly discovered that I couldn't afford a general contactor. When I got to the part where I could start putting the room back together, I was dismayed at the bids I was getting for the installation of the tile shower surround. I must have gotten 5-6 bids. Kaleb responded promptly to my inquiry. His bid was thorough and detailed. He was also one of the most reasonable. Not the lowest, but within my budget. I had to wait for Kaleb (he's very busy) but wow was he worth it. The tile installation was fast but he paid attention to all the details. The shower turned out GORGEOUS! Next was the LVT floor installation. Also fast but exact. Throughout the project, Kaleb listened to what I wanted, but would offer suggestions it I asked. (He was right) I'm so happy with his work and I have recommended him to all my friends.",
+        review_type:"1",
+        review_date:"2024-04-01",
+    },
+    {
+        customer:"Stuart T.",
+        review:"Kaleb did an excellent job on our floor and wall of tile. It was a tough job and he did it with patience and aplomb.",
+        review_type:"1",
+        review_date:"2023-10-01",
+    },
+    {
+        customer:"Hossein A.",
+        review:"Excellent job very fast and efficient. Many thanks",
+        review_type:"1",
+        review_date:"2023-10-01",
+    },
+    {
+        customer:"Nan K.",
+        review:"Kaleb was very meticulous and professional. He did a fantastic job on installing the backsplash for our kitchen. He goes extra mile by installing our knife bar magnet after the job was done. We are pleased with the results and would definitely hire him for projects in the future. Thank you Kaleb!",
+        review_type:"1",
+        review_date:"2023-08-01",
+    },
+    {
+        customer:"Tim S.",
+        review:"They did a very professional job; everything was done as we asked.",
+        review_type:"1",
+        review_date:"2023-08-01",
+    },
+    {
+        customer:"Alexis G.",
+        review:"Kaleb & Kam are truly incredible! We have worked with many contractors on our home renovations and they are a dream team. The most important thing you need in a contractor is honesty and reliability. They are incredibly great at communication and open to feedback so if you need something a little different, they do the right thing not the easy thing. They are proud of their work. Our bathroom is beautiful, I can’t say enough good things. They show up consistently, are so easy to talk to and really truly care. I felt safe and valued when we worked with them. I hope we get to work them again in the future! On top of that, their pricing is extremely fair. You just can’t get better, they do great business with a heart.",
+        review_type:"1",
+        review_date:"2023-07-01",
+    },
+    {
+        customer:"Patti P.",
+        review:"Kaleb did a great job! The demoed the original tile and laid the new which was not completely flat tile which is more of a challenge. He also did some wall repair from the tile which was there before. It all turned out great! I am very happy with the job Kaleb did from start to finish. He showed up when he said he would and kept a tidy work area. I’ll hire him again for my next job.",
+        review_type:"1",
+        review_date:"2023-07-01",
+    },
+    {
+        customer:"Joyce B.",
+        review:"Every project done was top notch, very professional and completed in a timely manner. Couldn’t be happier. Very honest and dependable.",
+        review_type:"1",
+        review_date:"2023-07-01",
+    },
+    {
+        customer:"Penny M.",
+        review:"Kaleb was an absolute delight to work with! Professional, knowledgeable and personable. He was transparent about his timeframe, was very helpful with his recommendations, and importantly, stayed within my budget. I would not hesitate to use his services again, and in fact, I have recommended him to several friends.",
+        review_type:"2",
+        review_date:"2025-01-01",
+    },
+    {
+        customer:"Michelle B.",
+        review:"Kaleb is top-notch at tiling, but is also an incredible coordinator of all the work involved in a job. Our shower retiling hit an early snag due to Kaleb's discovery of asbestos during demo. His professionalism, excellent communication, and care for his work were apparent throughout. Because of his concern to get the job done for us with our asbestos removal causing delay, he worked us back into his tight schedule and the work was still done with utmost care. I still notice small details that show just how much effort Kaleb put into our tile work. We love our shower now! And, Kaleb will be the only tiler we'll ask to do our future projects. I can't recommend him highly enough.",
+        review_type:"2",
+        review_date:"2024-04-01",
+    },
+    {
+        customer:"Aaron B.",
+        review:"Kaleb has been very easy and professional to work with. He is very detail oriented and his tile work is amazing. I would recommend him to all my friends and family.",
+        review_type:"2",
+        review_date:"2024-07-01",
+    },
+    {
+        customer:"Jody D.",
+        review:"Kaleb was meticulous! He did an amazing job tiling our shower and communicated with us through the whole process. We feel very lucky and thankful!",
+        review_type:"2",
+        review_date:"2024-03-01",
+    },
+    {
+        customer:"Staci B.",
+        review:"We loved our experience! The owner Kaleb is very responsive and detail oriented. Our fireplace tile project came out so beautifully and his bid for the project was priced fairly. We will definitely be using them again!",
+        review_type:"2",
+        review_date:"2021-07-01",
+    },
+    {
+        customer:"Patricia P.",
+        review:"Kaleb, the owner, was great to work with and very patient with changes that had to be made due to material deliveries, etc.   He is very neat in what he leaves behind and very meticulous in his work. A really nice guy to boot. I will definitely hire him again when I have another tile project and spread the word to friends.",
+        review_type:"2",
+        review_date:"2022-08-01",
+    },
+    {
+        customer:"Erik M.",
+        review:"Had our shower unit removed and replaced with tile. Also had our tub surround updated with new tile. We were extremely happy with the results. Guys were very friendly and trustworthy. Highly recommended!",
+        review_type:"2",
+        review_date:"2023-05-01",
+    },
+    {
+        customer:"Kris B.",
+        review:"Kaleb, owner, did an amazing job! The detail and professionalism was perfect. Having him do the next project!",
+        review_type:"2",
+        review_date:"2022-09-01",
+    },
+    
+]
+
+//----- SEED TESTIMONIALS ------------------------------------------------------------
+
+const insertTestimonials = async () => {
+    try {
+        for(const item of testimonials) {
+            await createTestimonial({
+                customer: item.customer,
+                review: item.review,
+                review_type: item.review_type,
+                review_date: item.review_date
+            })
+        }
+        console.log("testimonials seeded successfully");
+        
+    } catch (error) {
+        console.log("unable to seed previous work images", error);
+    }
+}
+
 //----- START SEED -------------------------------------------------------------------
 const seedDatabase = async () => {
     try {
@@ -1130,6 +1308,8 @@ const seedDatabase = async () => {
         await insertAdmins();
         await insertPreviousWork();
         await insertPreviousWorkImages();
+        await insertTestimonialTypes();
+        await insertTestimonials();
     } catch (error) {
         throw error;
     } finally {
