@@ -13,7 +13,7 @@ export default function Mission () {
                                 <p className="text-lg-start text-center fs-5">{missionBodyParagraph}</p>
                             </div>
                             <div className="col-xl-6 col-lg-5 col-md-8 col-sm-9 col-12 d-flex justify-content-center align-items-center">
-                                <img className="img-fluid rounded mt-3 p-lg-0 px-5" src="public/remodel-cartoon.jpg" alt="" />
+                                <img className="img-fluid rounded mt-3 p-lg-0 px-5" src="/remodel-cartoon.jpg" alt="cartoon remodel" />
                             </div>
                         </div>
                     </div>
