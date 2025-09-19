@@ -3,12 +3,13 @@ import { useState } from "react";
 
 export default function AdminBlogs() {
     const [blogs, setBlogs] = useState([]);
+    const API_URL = import.meta.env.VITE_API_URL;
     
 
     useEffect (() => {
         const fetchBlogs = async () => {
             try {
-                const res = await fetch("/api/blog");
+                const res = await fetch(`${API_URL}/api/blog`);
                 if (!res.ok) {
                     throw new Error("Failed to fetch blogs");
                   }

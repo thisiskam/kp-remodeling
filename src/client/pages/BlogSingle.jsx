@@ -8,11 +8,12 @@ export default function BlogSingle () {
     const [blogContent, setBlogContent] = useState()
     const [formattedDate, setFormattedDate] = useState(null);
     const navigate = useNavigate()
+    const API_URL = import.meta.env.VITE_API_URL
 
     useEffect (() => {
         const getSingleBlog = async () => {
             try {
-                const res = await fetch("/api/blog/" + id)
+                const res = await fetch(`${API_URL}/api/blog/` + id)
                 if(!res.ok) {
                     console.log("unable to fetch blog");
                 }

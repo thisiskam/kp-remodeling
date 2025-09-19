@@ -1,7 +1,7 @@
 import PageBanner from "../components/PageBanner"
 import { useNavigate } from "react-router-dom"
 import LogoutButton from "../components/LogoutButton"
-import AdminBlogs from "../components/adminBlogs"
+import AdminBlogs from "../components/AdminBlogs"
 
 export default function Admin () {
     const navigate= useNavigate()

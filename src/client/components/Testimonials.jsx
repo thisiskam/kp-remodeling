@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
+
 export default function Testimonials() {
     const [testimonials, setTestimonials] = useState([])
+    const API_URL = import.meta.env.VITE_API_URL
 
     useEffect(() => {
         const fetchTestimonials = async () => {
             try {
-                const res = await fetch("/api/testimonials");
+                const res = await fetch(`${API_URL}/api/testimonials`);
                   const data = await res.json();
                   
                   setTestimonials(data);

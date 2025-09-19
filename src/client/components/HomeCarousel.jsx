@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 export default function HomeCarousel() {
     const [images, setImages] = useState([]);
     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_API_URL
 
     useEffect(() => {
         const getImages = async () => {
             try {
-                const res = await fetch("/api/portfolio/random-images");
+                const res = await fetch(`${API_URL}/api/portfolio/random-images`);
                 if (!res.ok) {
                     throw new Error("Failed to fetch images");
                 }

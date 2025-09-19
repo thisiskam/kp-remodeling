@@ -7,12 +7,13 @@ export default function Login () {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
+    const API_URL = import.meta.env.VITE_API_URL
     
     const login = async () => {
         console.log("login triggered");
         
         try {
-            const response = await fetch("api/admin/login", {
+            const response = await fetch(`${API_URL}api/admin/login`, {
                 method: 'POST',
                 headers: {
                     "content-type": "application/json"

@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 export default function Blogcards (page){
     const [blogs, setBlogs] = useState([]);
     const navigate = useNavigate()
+    const API_URL = import.meta.env.VITE_API_URL
     
 
     useEffect (() => {
         const fetchBlogs = async () => {
             try {
-                const res = await fetch("/api/blog");
+                const res = await fetch(`${API_URL}/api/blog`);
                   const data = await res.json();
                   
                   setBlogs(data);

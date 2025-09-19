@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 
 export default function ProjectShowcase() {
     const [projects, setProjects] = useState([])
+    const API_URL = import.meta.env.VITE_API_URL
 
     useEffect (() => {
         const getPortfolios = async () => {
             try {
-                const res = await fetch("/api/portfolio")
+                const res = await fetch(`${API_URL}/api/portfolio`)
                 const data = await res.json()
                 setProjects(data)
             } catch (error) {
