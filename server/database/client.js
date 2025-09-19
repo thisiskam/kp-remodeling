@@ -1,27 +1,58 @@
-// server/database/client.js
-import dotenv from "dotenv";
-import pkg from "pg";
+
+import 'dotenv/config';
+import dns from 'dns';
+import pkg from 'pg';
 const { Pool } = pkg;
 
-dotenv.config();
 
-const connectionString =
-  process.env.DATABASE_URL || "postgres://localhost:5432/remodel_estimator";
+function buildPoolFromDatabaseUrl(databaseUrl) {
+  const url = new URL(databaseUrl);
+  const host = url.hostname;                 
+  const port = Number(url.port || 5432);
+  const user = decodeURIComponent(url.username || 'postgres');
+  const password = decodeURIComponent(url.password || '');
+  const database = url.pathname.replace(/^\//, '') || 'postgres';
 
-  import dns from "dns";
-  if (typeof dns.setDefaultResultOrder === "function") {
-    dns.setDefaultResultOrder("ipv4first");
+  return new Promise((resolve, reject) => {
+    dns.lookup(host, { family: 4 }, (err, address /* ipv4 */) => {
+      if (err) return reject(err);
+
+      const pool = new Pool({
+        host: address,        
+        port,
+        user,
+        password,
+        database,
+        ssl: {
+          rejectUnauthorized: false,
+          servername: host,
+        },
+      });
+
+      resolve(pool);
+    });
+  });
+}
+
+let _poolPromise;
+
+
+function getPool() {
+  if (!_poolPromise) {
+    const url = process.env.DATABASE_URL;
+    if (!url) throw new Error('Missing DATABASE_URL');
+    _poolPromise = buildPoolFromDatabaseUrl(url);
   }
-  
-const pool = new Pool({
-  connectionString,
-  ssl: process.env.NODE_ENV === "production"
-    ? { rejectUnauthorized: false } // required for Supabase
-    : false
-});
+  return _poolPromise;
+}
 
-// Export helper functions for queries and transactions
 export default {
-  query: (text, params) => pool.query(text, params),
-  connect: () => pool.connect() // only use if you need manual transactions
+  query: async (text, params) => {
+    const pool = await getPool();
+    return pool.query(text, params);
+  },
+  connect: async () => {
+    const pool = await getPool();
+    return pool.connect();
+  },
 };
