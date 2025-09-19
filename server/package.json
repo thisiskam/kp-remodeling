@@ -2,10 +2,8 @@
     "name": "kp_remodeling_api",
     "private": true,
     "type": "module",
-    "scripts": {
-      "dev": "nodemon main.js",
-      "start": "node main.js"
-    },
+    "engines": { "node": ">=20 <23" },
+    "scripts": { "start": "node main.js" },
     "dependencies": {
       "bcrypt": "^5.1.1",
       "body-parser": "^1.20.3",

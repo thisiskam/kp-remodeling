@@ -8,7 +8,11 @@ dotenv.config();
 const connectionString =
   process.env.DATABASE_URL || "postgres://localhost:5432/remodel_estimator";
 
-// Use a connection pool instead of a single client
+  import dns from "dns";
+  if (typeof dns.setDefaultResultOrder === "function") {
+    dns.setDefaultResultOrder("ipv4first");
+  }
+  
 const pool = new Pool({
   connectionString,
   ssl: process.env.NODE_ENV === "production"
