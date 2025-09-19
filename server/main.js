@@ -1,6 +1,3 @@
-import dns from 'dns';
-dns.setDefaultResultOrder('ipv4first');
-
 import 'dotenv/config';
 import express from "express";
 import cors from "cors";
@@ -37,6 +34,6 @@ app.get("/health", async (_req, res) => {
 });
 
 // Start Express normally (no vite-express)
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`API listening on ${PORT}`);
 });
